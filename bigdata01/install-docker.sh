@@ -14,7 +14,7 @@ cat > /etc/docker/daemon.json << EOF
 {
   "data-root": "/var/lib/docker",
   "registry-mirrors" : [
-    ""
+    "https://mn95oixs.mirror.aliyuncs.com"
   ],
   "insecure-registries" : [
     "192.168.0.0/16",
