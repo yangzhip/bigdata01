@@ -1,4 +1,35 @@
-o ${TGZ}
+
+e ${TGZ}
+ore
+apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+
+# 0.1 configure docker
+mkdir -p /etc/docker
+cat > /etc/docker/daemon.json << EOF
+{
+  "data-root": "/var/lib/docker",
+  "registry-mirrors" : [
+    ""
+  ],
+  "insecure-registries" : [
+    "192.168.0.0/16",
+    "172.0.0.0/8",
+    "10.0.0.0/8"
+  ],
+  "debug" : true,
+  "experimental" : true,
+  "max-concurrent-downloads" : 10
+}
+EOF
+
+# 1 find docker.tgz
+TGZ=$(find /opt -type f -name "*.tgz" | grep docker)
+echo ${TGZ}
 
 # 2 tar
 tar -zxf ${TGZ} -C /opt || echo error
@@ -49,5 +80,4 @@ systemctl restart docker
 
 # check
 docker info
-systemctl status docker 
-
+systemctl status docker  ${TGZ}
