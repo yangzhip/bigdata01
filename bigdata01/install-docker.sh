@@ -1,6 +1,6 @@
+#!/bin/bash
 
-e ${TGZ}
-ore
+# 0 prepare
 apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -80,4 +80,4 @@ systemctl restart docker
 
 # check
 docker info
-systemctl status docker  ${TGZ}
+systemctl status docker 
